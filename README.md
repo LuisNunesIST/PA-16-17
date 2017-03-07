@@ -1,3 +1,2 @@
 # PA-16-17
-Project for Advanced Programming (Programação avançada)
-2º semester 2016/17 (Instituto Superior Tecnico - IST professor António Leitão )
+Project for Advanced Programming (Programação avançada) from the 2nd semester of 2016/17 (Instituto Superior Tecnico - IST professor António Leitão )
