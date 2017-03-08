@@ -9,7 +9,7 @@
 		<javac srcdir="src" destdir="classes"/>
 	</target>
 	<target name="run">
-		<java classname="pt.ist.ap.labs.Hello">
+		<java classname="pt.ist.ap.labs.AskString">
 	       	<classpath>
 	           <pathelement location="classes"/>
 	        </classpath>
