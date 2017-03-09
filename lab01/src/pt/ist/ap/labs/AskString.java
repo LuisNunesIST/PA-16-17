@@ -24,13 +24,17 @@ public class AskString {
 	static Object instantiateClass(String className) {
 
 	try {
-		return Class.forName(className).newInstance();
+		 Message instance = (Message) Class.forName(className).newInstance();
+		 instance.say();
+		 return instance;
 	} 
 	catch (ClassNotFoundException cnfe) {
 		System.err.println("Class '" + className + "' not found");
 		System.exit(1);
 		return null;
 		}
-
+        catch(Exception e){
+            return null;
+        }
 	}
 }
