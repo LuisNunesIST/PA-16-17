@@ -1,0 +1,5 @@
+<target name="jar">
+    <jar destfile="./keyword.jar" basedir="classes">
+        <zipgroupfileset dir="lib" includes="*.jar"/>
+    </jar>
+</target>

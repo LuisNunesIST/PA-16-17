@@ -1,0 +1,18 @@
+<project name="Lab01" default="init" basedir=".">
+	<target name="init">
+		<mkdir dir="classes" />
+	</target>
+	<target name="clean">
+		<delete dir="classes" />
+	</target>
+	<target name="compile">
+		<javac srcdir="src" destdir="classes"/>
+	</target>
+	<target name="run">
+		<java classname="pt.ist.ap.labs.AskString">
+	       	<classpath>
+	           <pathelement location="classes"/>
+	        </classpath>
+	    </java>
+	</target>
+</project>
