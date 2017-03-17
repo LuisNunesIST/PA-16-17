@@ -1,0 +1,10 @@
+1- ElementType.CONSTRUCTOR ou ElementType.METHOD na annotation??
+
+2- prints vao estar no main?? (System.out.println(new Widget()));
+
+
+javac -classpath /afs/.ist.utl.pt/users/4/0/ist177940/Desktop/PA/jboss-javassist-javassist-6a3ed31/javassist.jar ist/meic/pa/*.java
+
+java -cp /afs/.ist.utl.pt/users/4/0/ist177940/Desktop/PA/jboss-javassist-javassist-6a3ed31/javassist.jar:. ist.meic.pa.KeywordConstructors ist.meic.pa.KeywordArgs
+
+
