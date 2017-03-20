@@ -10,37 +10,59 @@ public class KeywordConstructors {
 	public static void main(String[] args) throws Exception {
 		if (args.length < 1)
 		{
-			System.out.println("FIXME - Case where we dont pass arguments to the constructor");
+			System.out.println("FIXME");
 		}
 		else
 		{
 			ClassPool pool = ClassPool.getDefault();
 			CtClass ctClass = pool.get(args[0]);
 			Class<?> rtClass = ctClass.toClass();
-			ctClass.detach();
+			//ctClass.detach();
 
-			//nao sei se faço as coisas com a rtClass ou com a ctclass, ainda tenho que ler melhor a teorica
+			//nao sei se faço as coisas com a rtClass ou com a ctclass, ainda tenho que ler melhor a teorica, por agora faco com a ct
 
-			System.out.println("Class gotten:" + rtClass);
+			System.out.println("\nClass gotten: " + rtClass);
+
 
 			Constructor[] cons = rtClass.getConstructors();
-            for(Constructor c : cons){
+            for(Constructor c : cons)
+            {
+            	//Nao da para ver annotation de uma ctclass
             	if(c.isAnnotationPresent(KeywordArgs.class))
             	{
-            		System.out.println("Annotation KeywordArgs present");
-            		System.out.println("Constructor:" + c.toString());		//Esta a ir buscar os argumentos do construtor, é suposto ir buscar os atributos da classe e por isso no construtor?
-            		try{
+            		System.out.println("Annotation KeywordArgs is present in the following Cons:");
+            		System.out.println("Constructor -> " + c.toString() + "\n" );	
+            		try
+            		{
 
-            			/*
-						Nao seria feito nada disto, pensava que os construtores recebiam ja os parametros, mas pareceme que sao é os atributos da class (ints declarados la em cima)
-						ou seja, 
-						queria ir buscar os atributos da classe e de seguida redefinir o construtor com esses atributos e atribuirlhes os valores no campo value da annotation
-            			*/
-            			Class<?>[] parameters = c.getParameterTypes();
-            			//Not sure about this "IF"
-            			if(parameters.length > 0) {
-					        System.out.println(parameters);
-					        }                        
+            			CtField[] classAttributes = ctClass.getDeclaredFields();
+            			CtClass[] params = new CtClass[classAttributes.length];
+            			int i=0;
+
+            			for (CtField field : classAttributes) 
+            			{
+	            			System.out.println("Attribute -> Name: " + field.getName());
+	            			params[i] = field.getType();
+	            			System.out.println("Attribute -> Type: " + params[i]);
+
+
+        				}
+						System.out.println("1");
+						CtConstructor ctConstructor = new CtConstructor(params, ctClass);
+						System.out.println("2");
+           				//ctConstructor.setExceptionTypes(ctExceptions);
+            			ctConstructor.setBody("{ " + 
+            								 	"width = 10;" +
+            								 	"height = 10;" +
+            								 	"margin = 10;" +
+            				"}"	
+            				);
+						ctClass.addConstructor(ctConstructor);
+						ctClass.writeFile();
+
+						System.out.println("3");
+            		
+            		                     
         			} catch (Throwable ex) {
                		  System.out.printf("Test %s failed: %s %n", c, ex.getCause());
             }
