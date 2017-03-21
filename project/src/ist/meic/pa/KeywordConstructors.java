@@ -27,46 +27,54 @@ public class KeywordConstructors {
 			Constructor[] cons = rtClass.getConstructors();
             for(Constructor c : cons)
             {
-            	//Nao da para ver annotation de uma ctclass
+            	//Nao da para ver annotation de um ctconstructor
             	if(c.isAnnotationPresent(KeywordArgs.class))
             	{
             		System.out.println("Annotation KeywordArgs is present in the following Cons:");
             		System.out.println("Constructor -> " + c.toString() + "\n" );	
-            		try
-            		{
-
-            			CtField[] classAttributes = ctClass.getDeclaredFields();
-            			CtClass[] params = new CtClass[classAttributes.length];
-            			int i=0;
-
-            			for (CtField field : classAttributes) 
-            			{
-	            			System.out.println("Attribute -> Name: " + field.getName());
-	            			params[i] = field.getType();
-	            			System.out.println("Attribute -> Type: " + params[i]);
-
-
-        				}
-						System.out.println("1");
-						CtConstructor ctConstructor = new CtConstructor(params, ctClass);
-						System.out.println("2");
-           				//ctConstructor.setExceptionTypes(ctExceptions);
-            			ctConstructor.setBody("{ " + 
-            								 	"width = 10;" +
-            								 	"height = 10;" +
-            								 	"margin = 10;" +
-            				"}"	
-            				);
-						ctClass.addConstructor(ctConstructor);
-						ctClass.writeFile();
-
-						System.out.println("3");
             		
+
+        			CtField[] classAttributes = ctClass.getDeclaredFields();
+        			CtClass[] params = new CtClass[classAttributes.length];
+        			int i=0;
+
+        			for (CtField field : classAttributes) 
+        			{
+            			System.out.println("Attribute -> Name: " + field.getName());
+            			params[i] = field.getType();
+            			System.out.println("Attribute -> Type: " + params[i]);
+               			i++;
+
+    				}
+    				for(CtClass p : params)
+    				{
+    					System.out.println(p);
+    				}
+
+
+					String body =   "{ " + 
+								 	"width=10;" +
+								 	"height=10;" +
+								 	"margin=10;" +
+        							"}"	;
+					System.out.println("1");    
+					ctClass.defrost();        							
+					CtConstructor ctConstructor = CtNewConstructor.make(params, null, body, ctClass);
+					System.out.println("2");
+       				//ctConstructor.setExceptionTypes(ctExceptions);
+					ctClass.addConstructor(ctConstructor);
+					ctClass.writeFile();
+
+        		
             		                     
-        			} catch (Throwable ex) {
-               		  System.out.printf("Test %s failed: %s %n", c, ex.getCause());
-            }
+        	
             	}
+            }
+
+            CtConstructor[] ctcons = ctClass.getConstructors();
+            for(CtConstructor c : ctcons)
+            {
+            	System.out.println(c.getLongName());
             }
 
 		}
