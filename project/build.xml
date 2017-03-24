@@ -1,5 +1,33 @@
-<target name="jar">
-    <jar destfile="./keyword.jar" basedir="classes">
-        <zipgroupfileset dir="lib" includes="*.jar"/>
-    </jar>
-</target>
+
+<project name="PA-project" default="compile" basedir=".">
+    <target name="init">
+        <mkdir dir="classes" />
+    </target>
+    <target name="clean" depends="init">
+        <delete dir="classes" />
+    </target>
+    <target name="compile" depends="init">
+        <javac srcdir="src" destdir="classes">
+            <classpath>
+                <fileset dir=".">
+                    <include name="javassist.jar"/>
+                </fileset>
+            </classpath>
+        </javac>
+    </target>
+    <target name="run" depends="compile">
+        <java classname="ist.meic.pa.TestA">
+            <classpath>
+                <pathelement location="classes"/>
+                <fileset dir=".">
+                    <include name="javassist.jar"/>
+                </fileset>
+            </classpath>
+        </java>
+    </target>
+    <target name="jar">
+        <jar destfile="./keyword.jar" basedir="classes">
+            <zipgroupfileset dir="lib" includes="*.jar"/>
+        </jar>
+    </target>
+</project>
