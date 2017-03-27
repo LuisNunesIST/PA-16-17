@@ -7,7 +7,7 @@
         <delete dir="classes" />
     </target>
     <target name="compile" depends="init">
-        <javac srcdir="src" destdir="classes">
+        <javac srcdir="src" destdir="src">
             <classpath>
                 <fileset dir=".">
                     <include name="javassist.jar"/>
@@ -16,9 +16,9 @@
         </javac>
     </target>
     <target name="run" depends="compile">
-        <java classname="ist.meic.pa.TestA">
+        <java classname="ist.meic.pa.KeywordConstructors">
             <classpath>
-                <pathelement location="classes"/>
+                <pathelement location="src"/>
                 <fileset dir=".">
                     <include name="javassist.jar"/>
                 </fileset>

@@ -1,4 +1,5 @@
 package ist.meic.pa;
+
 import ist.meic.pa.KeywordArgs;
 
 class Widget {
@@ -13,5 +14,4 @@ class Widget {
 		return String.format("width:%s,height:%s,margin:%s",
 				width, height, margin);
 	}
-
 }
